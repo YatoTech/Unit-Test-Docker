@@ -1,14 +1,16 @@
 #!/bin/bash
 
 # === Konfigurasi dasar ===
-DOCKER_USERNAME="yatogamiitzy"   # ganti dengan Docker Hub kamu
+DOCKER_USERNAME="yatogamiitzy"     # Ganti dengan username Docker Hub kamu
 IMAGE_NAME="test"
-DOCKER_IMAGE="${DOCKER_USERNAME}/${IMAGE_NAME}"
-WORKFLOW_REPO=".github/"          # nama direktori repo workflow
-WORKFLOW_FILE="workflows/test-docker-image.yml"
+DOCKER_TAG="latest"
+DOCKER_IMAGE="${DOCKER_USERNAME}/${IMAGE_NAME}:${DOCKER_TAG}"
+WORKFLOW_DIR=".github/workflows"
+WORKFLOW_FILE="${WORKFLOW_DIR}/test-docker-image.yml"
 
 # === Step 1: Buat Dockerfile ===
 echo "📦 Membuat Dockerfile..."
+
 cat <<EOF > Dockerfile
 FROM ubuntu:20.04
 
@@ -46,20 +48,18 @@ echo "🚀 Push image ke Docker Hub..."
 docker push "$DOCKER_IMAGE"
 echo "✅ Push selesai."
 
-# === Step 4: Siapkan GitHub Workflow Repository ===
-echo "📁 Menyiapkan repo lokal untuk workflow..."
+# === Step 4: Siapkan direktori workflow ===
+echo "📁 Menyiapkan direktori workflow GitHub..."
+mkdir -p "$WORKFLOW_DIR"
 
-mkdir -p "$WORKFLOW_REPO/workflows"
-cd "$WORKFLOW_REPO"
-
-# === Step 5: Buat file workflow GitHub Actions ===
-echo "⚙️  Membuat file workflow GitHub Actions..."
-
+# Hapus file/folder jika sebelumnya salah dibuat sebagai direktori
 if [ -d "$WORKFLOW_FILE" ]; then
     echo "🧹 Menghapus direktori yang salah: $WORKFLOW_FILE"
     rm -rf "$WORKFLOW_FILE"
 fi
 
+# === Step 5: Buat file workflow GitHub Actions ===
+echo "⚙️  Membuat file workflow GitHub Actions..."
 
 cat <<EOF > "$WORKFLOW_FILE"
 name: Run Custom Docker Image
@@ -89,4 +89,4 @@ jobs:
           "
 EOF
 
-echo "✅ Workflow GitHub selesai dibuat di: $WORKFLOW_REPO/$WORKFLOW_FILE"
+echo "✅ Workflow GitHub selesai dibuat di: $WORKFLOW_FILE"

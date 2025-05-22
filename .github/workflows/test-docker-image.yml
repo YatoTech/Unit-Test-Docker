@@ -12,8 +12,8 @@ jobs:
 
     steps:
       - name: Pull Docker image
-        run: docker pull yatogamiitzy/test
+        run: docker pull yatogamiitzy/test:latest
 
       - name: Run docker container and check tools
         run: |
-          docker run --rm yatogamiitzy/test bash -c "            echo 'Python:' && python3 --version &&             echo 'Node:' && node --version &&             echo 'Golang:' && go version &&             echo 'MongoSH:' && mongosh --version &&             echo 'PostgreSQL:' && psql --version           "
+          docker run --rm yatogamiitzy/test:latest bash -c "            echo 'Python:' && python3 --version &&             echo 'Node:' && node --version &&             echo 'Golang:' && go version &&             echo 'MongoSH:' && mongosh --version &&             echo 'PostgreSQL:' && psql --version           "
