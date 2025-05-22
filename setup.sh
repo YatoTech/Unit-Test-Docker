@@ -1,15 +1,14 @@
 #!/bin/bash
 
 # === Konfigurasi dasar ===
-DOCKER_USERNAME="ridha_username"   # ganti dengan Docker Hub kamu
-IMAGE_NAME="custom_dev_env"
+DOCKER_USERNAME="yatogamiitzy"   # ganti dengan Docker Hub kamu
+IMAGE_NAME="test"
 DOCKER_IMAGE="${DOCKER_USERNAME}/${IMAGE_NAME}"
-WORKFLOW_REPO="unit_test"          # nama direktori repo workflow
+WORKFLOW_REPO="workflow"          # nama direktori repo workflow
 WORKFLOW_FILE=".github/workflows/test-docker-image.yml"
 
 # === Step 1: Buat Dockerfile ===
 echo "📦 Membuat Dockerfile..."
-
 cat <<EOF > Dockerfile
 FROM ubuntu:20.04
 

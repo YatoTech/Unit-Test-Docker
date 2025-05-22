@@ -1,0 +1,19 @@
+name: Run Custom Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-custom-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull Docker image
+        run: docker pull yatogamiitzy/test
+
+      - name: Run docker container and check tools
+        run: |
+          docker run --rm yatogamiitzy/test bash -c "            echo 'Python:' && python3 --version &&             echo 'Node:' && node --version &&             echo 'Golang:' && go version &&             echo 'MongoSH:' && mongosh --version &&             echo 'PostgreSQL:' && psql --version           "
