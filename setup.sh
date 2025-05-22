@@ -4,8 +4,8 @@
 DOCKER_USERNAME="yatogamiitzy"   # ganti dengan Docker Hub kamu
 IMAGE_NAME="test"
 DOCKER_IMAGE="${DOCKER_USERNAME}/${IMAGE_NAME}"
-WORKFLOW_REPO="workflow"          # nama direktori repo workflow
-WORKFLOW_FILE=".github/workflows/test-docker-image.yml"
+WORKFLOW_REPO=".github/"          # nama direktori repo workflow
+WORKFLOW_FILE="workflows/test-docker-image.yml"
 
 # === Step 1: Buat Dockerfile ===
 echo "📦 Membuat Dockerfile..."
@@ -49,7 +49,7 @@ echo "✅ Push selesai."
 # === Step 4: Siapkan GitHub Workflow Repository ===
 echo "📁 Menyiapkan repo lokal untuk workflow..."
 
-mkdir -p "$WORKFLOW_REPO/.github/workflows"
+mkdir -p "$WORKFLOW_REPO/workflows"
 cd "$WORKFLOW_REPO"
 
 # === Step 5: Buat file workflow GitHub Actions ===
